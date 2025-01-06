@@ -1,5 +1,15 @@
 extends CharacterBody3D
 
+# Player States
+enum PlayerState{
+	Still,
+	Walking,
+	Running,
+	Crouching,
+	Aiming
+}
+@export var currentPlayerState = PlayerState.Still;
+
 # Player Obejcts
 @onready var head = $Head
 @onready var crouching = $Crouching_Coll_Shape
@@ -43,17 +53,21 @@ func _physics_process(delta: float) -> void:
 		head.position.y = lerp(head.position.y, 1.8 + crouching_depth ,delta*lerp_speed)
 		standing.disabled = true;
 		crouching.disabled = false;
+		currentPlayerState = PlayerState.Crouching;
 	#Standing State
 	elif !ray_cast_3d.is_colliding():
 		head.position.y = lerp(head.position.y,1.8,delta*lerp_speed)
 		standing.disabled = false;
 		crouching.disabled = true;
+		currentPlayerState = PlayerState.Still;
 		#Spriting State
 		if Input.is_action_pressed("sprint"):
 			current_speed = springting_speed
+			currentPlayerState = PlayerState.Running;
 		#Standard State
 		else:
 			current_speed = walking_speed
+			currentPlayerState = PlayerState.Walking;
 	
 	# Add the gravity.
 	if not is_on_floor():
