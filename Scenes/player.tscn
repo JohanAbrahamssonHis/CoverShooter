@@ -1,12 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://0dcccq3kxyrq"]
+[gd_scene load_steps=12 format=3 uid="uid://0dcccq3kxyrq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_kln31"]
 [ext_resource type="Script" path="res://Scripts/coverSystem.gd" id="2_pbdyh"]
+[ext_resource type="Texture2D" uid="uid://dmk7m0qsdrv5f" path="res://2d/pistol/gfx_pads_f02.png" id="3_2ank6"]
+[ext_resource type="Texture2D" uid="uid://iusb6e2nivyp" path="res://2d/pistol/gfx_pads_f01.png" id="3_xxjgi"]
+[ext_resource type="Texture2D" uid="uid://dbvkm47te8c5u" path="res://2d/pistol/gfx_pads_f03.png" id="4_3tqal"]
+[ext_resource type="Texture2D" uid="uid://dhtfkqem1eto6" path="res://2d/pistol/gfx_pads_f04.png" id="5_3aqvv"]
+[ext_resource type="Texture2D" uid="uid://xd14ysj5unb6" path="res://2d/pistol/gfx_pads_f05.png" id="6_kk77d"]
+[ext_resource type="Texture2D" uid="uid://c3q5ri5l8end0" path="res://2d/pistol/gfx_pads_f06.png" id="7_4kj6c"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kwtwf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_frsl7"]
 height = 1.2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eytpn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2ank6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3tqal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3aqvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kk77d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4kj6c")
+}],
+"loop": false,
+"name": &"ads",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xxjgi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_kln31")
@@ -48,3 +85,27 @@ target_position = Vector3(0, 0, -1)
 [node name="RayCast3DBottomLeft" type="RayCast3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.1, 0)
 target_position = Vector3(0, 0, -1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="pistol1" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="pistol_sprite" type="AnimatedSprite2D" parent="CanvasLayer/pistol1"]
+texture_filter = 1
+position = Vector2(-556, -150)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_eytpn")
+animation = &"ads"
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
