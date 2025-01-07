@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dua2saf45ukjd"]
+[gd_scene load_steps=24 format=3 uid="uid://dua2saf45ukjd"]
 
 [ext_resource type="Texture2D" uid="uid://cice3tnsjrndv" path="res://gfx/skybox/skybox_default1.png" id="1_gn87k"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="2_yq1sr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/data_vector_int.gd" id="4_q64h0"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/data_vector_float.gd" id="5_jt65n"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/resources/mesh_vector_data.gd" id="6_ekcvr"]
+[ext_resource type="PackedScene" uid="uid://0dcccq3kxyrq" path="res://Scenes/player.tscn" id="7_u8uqn"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_32tii"]
 panorama = ExtResource("1_gn87k")
@@ -151,6 +152,8 @@ face_vertex_data = {
 
 [node name="test_level" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.248948, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("7_u8uqn")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dygov")

@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://brd4ylv2r5q1m"]
+[gd_scene load_steps=5 format=3 uid="uid://brd4ylv2r5q1m"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_0buas"]
-[ext_resource type="Script" path="res://Scripts/coverSystem.gd" id="2_uoa7w"]
+[ext_resource type="PackedScene" uid="uid://0dcccq3kxyrq" path="res://Scenes/player.tscn" id="1_jbc7q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vhbwn"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,11 +14,6 @@ background_mode = 2
 sky = SubResource("Sky_ydnjt")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kwtwf"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_frsl7"]
-height = 1.2
 
 [node name="World" type="Node3D"]
 
@@ -49,43 +43,4 @@ environment = SubResource("Environment_jpybu")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("1_0buas")
-
-[node name="Standing_Coll_Shape" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_kwtwf")
-
-[node name="Crouching_Coll_Shape" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-shape = SubResource("CapsuleShape3D_frsl7")
-disabled = true
-
-[node name="Head" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
-
-[node name="RayCast3D" type="RayCast3D" parent="Player"]
-target_position = Vector3(0, 2, 0)
-
-[node name="Node3D" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0284519, -0.0163493, -0.015488)
-script = ExtResource("2_uoa7w")
-width = 0.8
-
-[node name="RayCast3DTopRight" type="RayCast3D" parent="Player/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 2, 0)
-target_position = Vector3(0, 0, -1)
-
-[node name="RayCast3DTopLeft" type="RayCast3D" parent="Player/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 2, 0)
-target_position = Vector3(0, 0, -1)
-
-[node name="RayCast3DBottomRight" type="RayCast3D" parent="Player/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.1, 0)
-target_position = Vector3(0, 0, -1)
-
-[node name="RayCast3DBottomLeft" type="RayCast3D" parent="Player/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.1, 0)
-target_position = Vector3(0, 0, -1)
+[node name="Player" parent="." instance=ExtResource("1_jbc7q")]
