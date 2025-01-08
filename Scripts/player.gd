@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+var Cover = preload("res://Scripts/coverSystem.gd")
+
 # Player States
 enum PlayerState{
 	Still,
@@ -9,6 +11,17 @@ enum PlayerState{
 	Aiming
 }
 @export var currentPlayerState = PlayerState.Still;
+
+@onready var cover: Cover = $Cover
+
+@onready var pistol_1: Control = $CanvasLayer/pistol1
+@export var cameraBobFrequencyX = 4
+@export var cameraBobFrequencyY = 8
+@export var cameraBobAmplitudeX = 4
+@export var cameraBobAmplitudeY = 2
+@export var cameraBounce = 45
+var pistol_1SavePos
+
 
 # Player Obejcts
 @onready var head = $Head
@@ -33,8 +46,11 @@ var current_speed = 5.0
 @export var mouse_sens = 0.4
 var direction = Vector3.ZERO
 
+var time = 0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pistol_1SavePos = pistol_1.position
 
 func _input(event: InputEvent):
 	#Mouse Looking
@@ -44,7 +60,15 @@ func _input(event: InputEvent):
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
 func _physics_process(delta: float) -> void:
+	time += delta
 	
+	cover.isCrouching = currentPlayerState == PlayerState.Crouching
+	
+	if currentPlayerState == PlayerState.Still:
+		returnToBase(delta)
+	
+	if currentPlayerState!=PlayerState.Still:
+		screenMove(cameraBobFrequencyX,cameraBobAmplitudeX,cameraBobFrequencyY,cameraBobAmplitudeY)
 	#Handle Movement States
 	
 	#Crouching State
@@ -72,6 +96,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		jumpMove(delta)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
@@ -80,6 +105,8 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
+	if input_dir==Vector2.ZERO:
+		currentPlayerState = PlayerState.Still
 	direction = lerp(direction,(transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(),delta*lerp_speed);
 	if direction:
 		velocity.x = direction.x * current_speed
@@ -89,3 +116,13 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	move_and_slide()
+
+
+func screenMove(param1T1, param2T1,param1T2, param2T2):
+	pistol_1.position += Vector2(sin(param1T1*time)*param2T1,sin(param1T2*time)*param2T2)
+	
+func returnToBase(delta):
+	pistol_1.position = lerp(pistol_1.position,pistol_1SavePos,delta*lerp_speed)
+	
+func jumpMove(delta):
+	pistol_1.position = lerp(pistol_1.position,pistol_1SavePos + Vector2(0,cameraBounce),delta*lerp_speed)

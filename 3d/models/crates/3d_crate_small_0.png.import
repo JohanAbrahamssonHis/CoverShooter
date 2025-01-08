@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://dd6nvy4s1ljop"
+path.s3tc="res://.godot/imported/3d_crate_small_0.png-4d9720a2ebbbe0d8d2eaaba41eef8624.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "de0ddf9a388c7470ab4fd99ab955838b"
+}
+
+[deps]
+
+source_file="res://3d/models/crates/3d_crate_small_0.png"
+dest_files=["res://.godot/imported/3d_crate_small_0.png-4d9720a2ebbbe0d8d2eaaba41eef8624.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
