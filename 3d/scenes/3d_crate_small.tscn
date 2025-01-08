@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=4 uid="uid://ccu782d3quheh"]
+
+[ext_resource type="Texture2D" uid="uid://ddoflqsv64er8" path="res://3d/models/crates/3d_crate_small.png" id="1_a6dw3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18qgu"]
+resource_name = "texture_1"
+transparency = 2
+alpha_scissor_threshold = 0.01
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_a6dw3")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5jh0q"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAACAAEAAAABAAMAAwABAAQAAwAEAAUABQAEAAYABQAGAAcABwAGAAIABwACAAAABwAAAAMABwADAAUABAABAAIABAACAAYA"),
+"name": "texture_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD///////8AAAAA/////wAA//8AAP//AAD/////AAAAAP//AAAAAAAAAAD//wAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_k0shy"]
+resource_name = "default_mesh"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("AAD/////AAAAAAAAAAD//////////wAAAAD/////AAAAAAAAAAD//////////wAAAAD/////AAAAAAAAAAD//////////wAAAAD/////AAAAAAAAAAD//////////wAAAAD/////AAAAAAAAAAD//////////wAAAAD/////AAAAAAAAAAD//////////wAA"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQABgAIAAcACQALAAoADAAOAA0ADwARABAAEgAUABMAFQAXABYAGAAaABkAGwAdABwAHgAgAB8AIQAjACIA"),
+"material": SubResource("StandardMaterial3D_18qgu"),
+"name": "texture_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAAAAP//AID///////8AgAAA/////wCAAAAAAP//AID//wAA//8AgP///////wCA//8AAP///7//////AAD/v/////////+///8AAP///7///wAAAAD/v/////8AAP+///8AAAAA//8AAP//AAD///////8AAP////8AAAAA//8AAAAAAAD//wAA//8AAP//AAAAAAAA/78AAP//////vwAA//8AAP+/AAAAAAAA/78AAAAA////vwAA//////+/AAAAAAAA/7///wAA////vwAAAAD///+/AAAAAAAA/7///wAAAAD/v///AAD///+//////wAA//8AAP///////////////////////wAA//8AAP//AAD//wAA/////////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_5jh0q")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pahgq"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="default2" type="StaticBody3D"]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+mesh = SubResource("ArrayMesh_k0shy")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_pahgq")

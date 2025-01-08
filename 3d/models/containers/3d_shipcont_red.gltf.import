@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ca8nkad222h75"
-path="res://.godot/imported/3d_crate_small.gltf-92ad172f3ae967bce6f9a16c3b7ab075.scn"
+uid="uid://immvkhtluljs"
+path="res://.godot/imported/3d_shipcont_red.gltf-7e88c6b96cdd0e6367a1099c4bf09073.scn"
 
 [deps]
 
-source_file="res://3d/models/3d_crate_small.gltf"
-dest_files=["res://.godot/imported/3d_crate_small.gltf-92ad172f3ae967bce6f9a16c3b7ab075.scn"]
+source_file="res://3d/models/containers/3d_shipcont_red.gltf"
+dest_files=["res://.godot/imported/3d_shipcont_red.gltf-7e88c6b96cdd0e6367a1099c4bf09073.scn"]
 
 [params]
 
