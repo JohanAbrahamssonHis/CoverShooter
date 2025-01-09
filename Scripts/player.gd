@@ -14,6 +14,9 @@ enum PlayerState{
 
 @onready var cover: Cover = $Cover
 
+
+
+@onready var camera_3d: Camera3D = $Head/Camera3D
 @onready var pistol_1: Control = $CanvasLayer/pistol1
 @export var cameraBobFrequencyX = 4
 @export var cameraBobFrequencyY = 8
@@ -22,6 +25,12 @@ enum PlayerState{
 @export var cameraBounce = 45
 var pistol_1SavePos
 
+#ADS variables
+@export var FOVZoom = 30.0
+@export var ScaleZoom = 2.0
+@export var SpriteDownPull = 300.0
+@onready var pistol_animation = $CanvasLayer/pistol1/pistol_sprite
+var playOnce = false
 
 # Player Obejcts
 @onready var head = $Head
@@ -64,12 +73,25 @@ func _physics_process(delta: float) -> void:
 	
 	cover.isCrouching = currentPlayerState == PlayerState.Crouching
 	
-	if currentPlayerState == PlayerState.Still:
-		returnToBase(delta)
+	returnToBase(delta)
 	
 	if currentPlayerState!=PlayerState.Still:
-		screenMove(cameraBobFrequencyX,cameraBobAmplitudeX,cameraBobFrequencyY,cameraBobAmplitudeY)
+		screenMove(cameraBobFrequencyX,cameraBobAmplitudeX,cameraBobFrequencyY,cameraBobAmplitudeY, delta)
 	#Handle Movement States
+	
+	if Input.is_action_pressed("ADS"):
+		pistol_1.scale = lerp(pistol_1.scale, Vector2(ScaleZoom,ScaleZoom), delta*lerp_speed)
+		pistol_1.position = lerp(pistol_1.position, pistol_1.position+Vector2(0,SpriteDownPull), delta*lerp_speed)
+		camera_3d.fov = lerp(camera_3d.fov, FOVZoom, delta*lerp_speed)
+		if(!playOnce):
+			playOnce = true
+			pistol_animation.play("ads",1,false)
+	else:
+		pistol_1.scale = lerp(pistol_1.scale, Vector2(1,1), delta*lerp_speed)
+		camera_3d.fov = lerp(camera_3d.fov, 75.0, delta*lerp_speed)
+		if(playOnce):
+			pistol_animation.play_backwards("ads")
+		playOnce = false
 	
 	#Crouching State
 	if Input.is_action_pressed("crouch"):
@@ -118,8 +140,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func screenMove(param1T1, param2T1,param1T2, param2T2):
-	pistol_1.position += Vector2(sin(param1T1*time)*param2T1,sin(param1T2*time)*param2T2)
+func screenMove(param1T1, param2T1,param1T2, param2T2, delta):
+	pistol_1.position += lerp(Vector2(sin(param1T1*time)*param2T1,-abs(sin(param1T2*time)*param2T2)),Vector2.ZERO,delta*lerp_speed)
 	
 func returnToBase(delta):
 	pistol_1.position = lerp(pistol_1.position,pistol_1SavePos,delta*lerp_speed)
