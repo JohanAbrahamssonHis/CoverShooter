@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://0dcccq3kxyrq"]
+[gd_scene load_steps=14 format=3 uid="uid://0dcccq3kxyrq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_kln31"]
 [ext_resource type="Script" path="res://Scripts/coverSystem.gd" id="2_pbdyh"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dhtfkqem1eto6" path="res://2d/pistol/gfx_pads_f04.png" id="5_3aqvv"]
 [ext_resource type="Texture2D" uid="uid://xd14ysj5unb6" path="res://2d/pistol/gfx_pads_f05.png" id="6_kk77d"]
 [ext_resource type="Texture2D" uid="uid://c3q5ri5l8end0" path="res://2d/pistol/gfx_pads_f06.png" id="7_4kj6c"]
+[ext_resource type="Texture2D" uid="uid://bjr4egb125qqt" path="res://2d/ledgegrab/gfx_ledgra_f01.png" id="9_cd0pd"]
+[ext_resource type="Texture2D" uid="uid://difvorpbiqahk" path="res://2d/ledgegrab/gfx_ledgra_f02.png" id="10_l88ep"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kwtwf"]
 
@@ -43,6 +45,17 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_cd0pd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l88ep")
+}],
+"loop": true,
+"name": &"ledge_grab",
+"speed": 10.0
 }]
 
 [node name="Player" type="CharacterBody3D"]
@@ -111,5 +124,5 @@ texture_filter = 1
 position = Vector2(0, -150)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_eytpn")
-animation = &"ads"
+animation = &"ledge_grab"
 autoplay = "default"
