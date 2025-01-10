@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://0dcccq3kxyrq"]
+[gd_scene load_steps=15 format=3 uid="uid://0dcccq3kxyrq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_kln31"]
 [ext_resource type="Script" path="res://Scripts/coverSystem.gd" id="2_pbdyh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c3q5ri5l8end0" path="res://2d/pistol/gfx_pads_f06.png" id="7_4kj6c"]
 [ext_resource type="Texture2D" uid="uid://bjr4egb125qqt" path="res://2d/ledgegrab/gfx_ledgra_f01.png" id="9_cd0pd"]
 [ext_resource type="Texture2D" uid="uid://difvorpbiqahk" path="res://2d/ledgegrab/gfx_ledgra_f02.png" id="10_l88ep"]
+[ext_resource type="Script" path="res://Scripts/LedgeGrabb.gd" id="11_bq1u4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kwtwf"]
 
@@ -126,3 +127,18 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_eytpn")
 animation = &"ledge_grab"
 autoplay = "default"
+
+[node name="Ledge Grabb" type="Node3D" parent="."]
+script = ExtResource("11_bq1u4")
+
+[node name="RayCast3DLowest" type="RayCast3D" parent="Ledge Grabb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, -1)
+
+[node name="RayCast3DHighest" type="RayCast3D" parent="Ledge Grabb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+target_position = Vector3(0, 0, -3)
+
+[node name="RayCast3DCheck" type="RayCast3D" parent="Ledge Grabb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1)
+target_position = Vector3(0, -2, 0)
