@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dua2saf45ukjd"]
+[gd_scene load_steps=28 format=3 uid="uid://dua2saf45ukjd"]
 
 [ext_resource type="Texture2D" uid="uid://cice3tnsjrndv" path="res://gfx/skybox/skybox_default1.png" id="1_gn87k"]
 [ext_resource type="Script" path="res://addons/cyclops_level_builder/nodes/cyclops_block.gd" id="2_yq1sr"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c350tki773coo" path="res://3d/prefabs/containers/prefab_shipcont_blue.tscn" id="8_chxlw"]
 [ext_resource type="PackedScene" uid="uid://dqfvrc5a842jb" path="res://3d/prefabs/containers/prefab_shipcont_red.tscn" id="9_f7ula"]
 [ext_resource type="PackedScene" uid="uid://ccu782d3quheh" path="res://3d/prefabs/crates/prefab_crate_small.tscn" id="10_r62n4"]
+[ext_resource type="PackedScene" uid="uid://cyd57yfajekcx" path="res://3d/prefabs/misc/prefab_practarg.tscn" id="11_7lerd"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_32tii"]
 panorama = ExtResource("1_gn87k")
@@ -168,6 +169,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248948, -1, 0)
 script = ExtResource("2_yq1sr")
 mesh_vector_data = SubResource("Resource_ys1ts")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25, 4.75, -7.75)
+light_energy = 5.0
+light_size = 0.524
+omni_range = 10.0
+
 [node name="environment" type="Node3D" parent="geometry"]
 
 [node name="prefab_shipcont_blue" parent="geometry/environment" instance=ExtResource("8_chxlw")]
@@ -178,3 +185,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5011, 0, -4)
 
 [node name="prefab_woodcrate_small" parent="geometry/environment" instance=ExtResource("10_r62n4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248948, 0, -6.25)
+
+[node name="prefab_practarg" parent="geometry/environment" instance=ExtResource("11_7lerd")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 6.50105, 0, -8)
+
+[node name="prefab_practarg2" parent="geometry/environment" instance=ExtResource("11_7lerd")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 6.50105, 0, -4.75)

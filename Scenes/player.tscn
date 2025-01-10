@@ -122,10 +122,9 @@ grow_vertical = 0
 
 [node name="pistol_sprite" type="AnimatedSprite2D" parent="CanvasLayer/pistol1"]
 texture_filter = 1
-position = Vector2(0, -150)
-scale = Vector2(2, 2)
+position = Vector2(0, -236)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_eytpn")
-animation = &"ledge_grab"
 autoplay = "default"
 
 [node name="Ledge Grabb" type="Node3D" parent="."]

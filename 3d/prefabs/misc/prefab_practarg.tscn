@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=4 uid="uid://cyd57yfajekcx"]
+
+[ext_resource type="Texture2D" uid="uid://qii5dx346ano" path="res://3d/models/misc/3d_practarg.png" id="1_1ae7c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmsgi"]
+resource_name = "texture_1"
+transparency = 2
+alpha_scissor_threshold = 0.01
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_1ae7c")
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_51jrn"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 3, 4, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAACAAEAAAABAAMA"),
+"name": "texture_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAABAQAAAgEAAAAAAAAAAAAAAgEAAAAAAAABAQAAAAAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_38c5n"]
+resource_name = "default_mesh"
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 3, 4, 1e-05),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAAAA"),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQA"),
+"material": SubResource("StandardMaterial3D_kmsgi"),
+"name": "texture_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAABAQAAAgEAAAAAAAAAAAAAAgEAAAAAAAAAAAAAAAAAAAAAAAABAQAAAAAAAAAAAAABAQAAAgEAAAAAA/3//f////7//f/9/////v/9//3////+//3//f////7//f/9/////v/9//3////+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_51jrn")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuc4u"]
+size = Vector3(1.5, 2, 0.001)
+
+[node name="prefab_practarg" type="StaticBody3D"]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("ArrayMesh_38c5n")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1, -0.000500001)
+shape = SubResource("BoxShape3D_tuc4u")
